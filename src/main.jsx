@@ -7,6 +7,7 @@ import AddProducts from './pages/AddProducts/AddProducts';
 import AllProducts from './pages/AllProducts/AllProducts';
 import AllUsers from './pages/AllUsers/AllUsers';
 import MainLayout from './layout/MainLayout';
+import DetailProduct from './pages/AllProducts/DetailProduct';
 
 
 // Router setup
@@ -25,8 +26,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProducts",
+        loader: () => fetch("http://localhost:5000/products"),
         element: <AllProducts />
       },
+      {
+        path: "/details/:id",
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+        element: <DetailProduct />
+      }
+      ,
       {
         path: "/allUsers",
         element: <AllUsers />
